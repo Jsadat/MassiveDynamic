@@ -1,0 +1,32 @@
+﻿@model MassiveDynamicSimpleMembershipApp.Models.Clients.ClientProfileModel
+
+@{
+    ViewBag.Title = "ClientProfile";
+}
+
+<h2>Client Profile</h2>
+
+<div>
+
+    <hr />
+    <table width="500px" height="200px" class=" table-striped table-responsive table-hover table-condensed table-bordered">
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.Name)</td>
+            <td>@Html.DisplayFor(model => model.Name)</td>
+        </tr>
+        <tr>
+            <td> @Html.DisplayNameFor(model => model.UserName)</td>
+            <td> @Html.DisplayFor(model => model.UserName)</td>
+        </tr>
+
+        <tr>
+            <td> @Html.DisplayNameFor(model => model.Email)</td>
+            <td>  @Html.DisplayFor(model => model.Email)</td>
+        </tr>
+
+        <tr>
+            <td> @Html.DisplayNameFor(model => model.UniqueId)</td>
+            <td> @Html.DisplayFor(model => model.UniqueId)</td>
+        </tr>
+    </table>
+</div>

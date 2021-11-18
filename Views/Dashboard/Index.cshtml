@@ -1,0 +1,116 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<br />
+<h2>Dashboard</h2>
+<div class="row">
+    <div class="col-md-12">
+        <div class="alert alert-info">
+            <p>Wellcome to Massive Dynamic Managment System</p>
+        </div>
+    </div>
+    <br />
+
+    @if (User.IsInRole("Administrator"))
+    {
+        <div class="col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">User Management</h3>
+                </div>
+                <div class="panel-body text-center">
+                    <div class="col-md-3">
+                        <a href='@Url.Action("UserList", "Accounts")'>
+                            <i class="fas fa-users fa-3x"></i>
+                            <h4>Users List</h4>
+                        </a>
+                    </div>
+
+                    <div class="col-md-3">
+                        <a href='@Url.Action("Register", "Accounts")'>
+                            <i class="fas fa-user fa-3x"></i>
+                            <h4>Register User</h4>
+                        </a>
+                    </div>
+
+                    @*<div class="col-md-3">
+                            <a href='@Url.Action("UserList", "Accounts")'>
+                                <i class="far fa-file-alt fa-3x"></i>
+                                <h4>Client Document</h4>
+                            </a>
+                        </div>
+
+                        <div class="col-md-3">
+                            <a href='@Url.Action("Register", "Accounts")'>
+                                <i class="fas fa-user fa-3x"></i>
+                                <h4>Register User</h4>
+                            </a>
+                        </div>*@
+
+                </div>
+            </div>
+        </div>
+
+    }
+
+    @if (User.IsInRole("Administrator") || User.IsInRole("Secretary"))
+    {
+
+        <div class="col-md-6">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Client Management</h3>
+                </div>
+                <div class="panel-body text-center">
+                    <div class="col-md-3">
+                        <a href='@Url.Action("Index", "Clients")'>
+                            <i class="fas fa-users fa-3x"></i>
+                            <h4>Client List</h4>
+                        </a>
+                    </div>
+
+                    <div class="col-md-3">
+                        <a href='@Url.Action("Register", "Accounts")'>
+                            <i class="fas fa-user fa-3x"></i>
+                            <h4>Register New Client</h4>
+                        </a>
+                    </div>
+
+                    <div class="col-md-3">
+                        <a href='@Url.Action("Index", "Clients")'>
+                            <i class="far fa-file-alt fa-3x"></i>
+                            <h4>Client Document</h4>
+                        </a>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    }
+
+    @if (User.IsInRole("Client"))
+    {
+        <div class="col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Client Management</h3>
+                </div>
+                <div class="panel-body text-center">
+                    <div class="col-md-3">
+                        <a href='@Url.Action("ClientProfile", "Clients")'>
+                            <i class="fas fa-user fa-3x"></i>
+                            <h4>Your Profile</h4>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+
+
+

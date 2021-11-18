@@ -1,0 +1,88 @@
+﻿@model IEnumerable<MassiveDynamicSimpleMembershipApp.Models.Clients.ClientsModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>List of all Clients</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Register","Accounts")
+</p>
+<div class="row">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            <div class="form-group">
+                @Html.Label("Search :", new { @class = "control-label col-md-2" })
+                <div class="col-md-8">
+                    @Html.TextBox("SearchTerm", null, new { @class = "form-control", @style = "max-width:100%;" })
+                </div>
+                <div class="col-md-2">
+                    <input type="submit" value="Search" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<hr />
+
+<table class="table table-striped table-hover table-condensed">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UniqueID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FilePath)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UniqueID)
+            </td>
+            <td>
+
+                @Html.ActionLink("View Documents", "ViewDocument", "Clients", new { id = item.UserId }, null)
+
+            </td>
+
+            <td>
+                @*@Html.ActionLink("Edit", "EditClient", "Clients", new { userid = item.UserId })*@
+                <a href='@Url.Action("EditClient","Clients",new {userid = item.UserId})'><i class="glyphicon glyphicon-edit text-info" style="font-size:20px;"></i></a>
+                |   <a href='@Url.Action("DeleteClient","Clients",new {userid = item.UserId})'><i class="glyphicon glyphicon-trash text-danger" style="font-size:20px;"></i></a>
+
+                @*@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+            </td>
+        </tr>
+    }
+
+</table>

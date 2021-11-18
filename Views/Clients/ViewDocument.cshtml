@@ -1,0 +1,43 @@
+﻿@model IEnumerable<MassiveDynamicSimpleMembershipApp.Models.Clients.ClientsModel>
+
+@{
+    ViewBag.Title = "ViewDocument";
+}
+
+<h2>Document Of Client :   </h2>
+<br />
+
+<p>
+    @Html.ActionLink("Upload New Document", "Index","Document")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FileName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FilePath)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FileName)
+            </td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.FilePath)*@
+                <a href='@Url.Content(item.FilePath)'>View Document</a>
+            </td>
+            <td>
+                @if (User.IsInRole("Administrator"))
+                {
+                    <a href='@Url.Action("Delete", "Clients", new { Clientid = item.ID })'><i class="glyphicon glyphicon-trash text-danger" style="font-size:25px;"></i></a>
+                }
+            </td> 
+
+        </tr>
+    }
+
+</table>

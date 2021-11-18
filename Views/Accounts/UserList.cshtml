@@ -1,0 +1,61 @@
+﻿@model IEnumerable<MassiveDynamicSimpleMembershipApp.Models.Accounts.UserModel>
+
+@{
+    ViewBag.Title = "UserList";
+}
+
+<h2>List of All Users</h2>
+
+<p>
+    @Html.ActionLink("Create New User", "Register", "Accounts")
+</p>
+<hr /><br />
+<table class="table table-striped table-hover table-condensed">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Role)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Role)
+            </td>
+            <td>
+                @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
+                @*@Html.ActionLink("DeleteUsers","Accounts", new {id = item.UserId})*@
+             
+                <a href='@Url.Action("DeleteUser","Accounts",new {userid = item.UserId})'><i class="glyphicon glyphicon-trash text-danger" style="font-size:25px;"></i></a>
+            </td>
+        </tr>
+    }
+
+</table>
