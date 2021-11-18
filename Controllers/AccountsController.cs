@@ -40,6 +40,7 @@ namespace MassiveDynamicSimpleMembershipApp.Controllers
         public ActionResult Login()
         {
             return View();
+
         }
 
         //is used login to the system by username and password

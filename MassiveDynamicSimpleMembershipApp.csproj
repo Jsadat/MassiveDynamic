@@ -172,6 +172,7 @@
     <Content Include="Views\Clients\EditClient.cshtml" />
     <Content Include="Views\Document\Index.cshtml" />
     <Content Include="Views\Clients\ClientProfile.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

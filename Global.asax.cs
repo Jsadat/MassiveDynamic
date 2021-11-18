@@ -15,9 +15,12 @@ namespace MassiveDynamicSimpleMembershipApp
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            GlobalFilters.Filters.Add(new HandleErrorAttribute());
             InializeAuthenticationProcess();
         }
 
+
+        //this line of codes is used to generate Table schema in sql server
         private void InializeAuthenticationProcess()
         {
             if(!WebSecurity.Initialized)
