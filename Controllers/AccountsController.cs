@@ -15,7 +15,7 @@ namespace MassiveDynamicSimpleMembershipApp.Controllers
 {
     public class AccountsController : Controller
     {
-        // is user to get all users from DB
+        // is used to get all users from DB and only administrator can see
         [Authorize(Roles = "Administrator")]
         public ActionResult UserList()
         {
@@ -23,6 +23,7 @@ namespace MassiveDynamicSimpleMembershipApp.Controllers
             return View(users);
         }
 
+        // administrator allow to delete Users
         [Authorize(Roles = "Administrator")]
         public ActionResult DeleteUser(int userid = 0)
         {
@@ -33,24 +34,24 @@ namespace MassiveDynamicSimpleMembershipApp.Controllers
             return RedirectToAction("UserList", "Accounts");
 
         }
-        // GET: Accounts
+        // GET: Accounts Return view of login page
         [HttpGet]
         public ActionResult Login()
         {
             return View();
         }
 
-        //is used login to the system the username and password
+        //is used login to the system by username and password
         [HttpPost, ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel loginModel)
         {
-
             if (ModelState.IsValid)
             {
                 //checking user is authentcated
                 bool isAuthenticated = WebSecurity.Login(loginModel.UserName, loginModel.Password, loginModel.RememberMe);
                 if (isAuthenticated)
                 {
+                    // keeping Url history if it's not null redirect to Return Url other redirect to Dashboard
                     string returnUrl = Request.QueryString["ReturnUrl"];
                     if (returnUrl == null)
                     {
@@ -75,6 +76,7 @@ namespace MassiveDynamicSimpleMembershipApp.Controllers
             return RedirectToAction("Login", "Accounts");
         }
 
+        //is the View of Registration Field
         [HttpGet]
         [Authorize(Roles = "Administrator , Secretary")]
         public ActionResult Register()
@@ -82,12 +84,15 @@ namespace MassiveDynamicSimpleMembershipApp.Controllers
             GetRolesForCurrentUser();
             return View();
         }
+
+        //this Function is Used to check the role of the current client with enum class and pass to dropdownlist
         private void GetRolesForCurrentUser()
         {
             if (Roles.IsUserInRole(WebSecurity.CurrentUserName, "Administrator"))
                 ViewBag.RoleId = (int)role.Administrator;
             else ViewBag.RoleId = (int)role.NoRole;
         }
+
 
         [HttpPost, ValidateAntiForgeryToken]
         [Authorize(Roles = "Administrator , Secretary")]
@@ -110,12 +115,14 @@ namespace MassiveDynamicSimpleMembershipApp.Controllers
                         string FronUniqueID = registrationModel.ClientUniqueID;
                         string DBClientID = FilesViewModel.CheckUniqueID(FronUniqueID);
 
+                        // here We are Checking where the Unique Client ID is Exist or not
                         if (DBClientID == FronUniqueID)
                         {
                             ModelState.AddModelError("ClientUniqueID", "This Id is already Exist");
                         }
                         else
                         {
+                            #region This is for files unique ID and and client Info insertion
                             //Extract Image File Name.
                             string fileName = Path.GetFileName(postedFile.FileName);
                             //Set the Image File Path.
@@ -132,16 +139,19 @@ namespace MassiveDynamicSimpleMembershipApp.Controllers
                             Roles.AddUserToRole(registrationModel.UserName, registrationModel.Role);
                             FilesViewModel.InsertFile(registrationModel);
                             ViewBag.Message = "User Registered Successfully";
+                            #endregion
                         }
                     }
                     else
                     {
+                        #region this is for administrator/Scretary Insert 
                         //Used to create different Users based on roles
                         WebSecurity.CreateUserAndAccount(registrationModel.UserName, registrationModel.Password,
                             new { Name = registrationModel.Name, Email = registrationModel.Email });
                         //Used to add roles to user
                         Roles.AddUserToRole(registrationModel.UserName, registrationModel.Role);
                         ViewBag.Message = "User Registered Successfully";
+                        #endregion
                     }
                 }
             }

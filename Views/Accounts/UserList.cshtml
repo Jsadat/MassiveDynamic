@@ -49,10 +49,6 @@
                 @Html.DisplayFor(modelItem => item.Role)
             </td>
             <td>
-                @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
-                @*@Html.ActionLink("DeleteUsers","Accounts", new {id = item.UserId})*@
-             <p>this is said jafar sadat</p>
                 <a href='@Url.Action("DeleteUser","Accounts",new {userid = item.UserId})'><i class="glyphicon glyphicon-trash text-danger" style="font-size:25px;"></i></a>
             </td>
         </tr>
