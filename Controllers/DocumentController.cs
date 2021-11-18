@@ -13,16 +13,18 @@ namespace MassiveDynamicSimpleMembershipApp.Controllers
 {
     public class DocumentController : Controller
     {
-        // GET: Document
+        // GET: Document this is an extral control to add new documents for client
+        [Authorize(Roles = "Administrator , Secretary")]
         public ActionResult Index()
         {
             return View();
         }
 
+        //this Function is used to Upload the posted file and keep record to DB
         [HttpPost, ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator , Secretary")]
         public ActionResult Index(Document_Model model, HttpPostedFileBase postedFile)
         {
-
             //Extract Image File Name.
             string fileName = Path.GetFileName(postedFile.FileName);
             //Set the Image File Path.
@@ -34,11 +36,7 @@ namespace MassiveDynamicSimpleMembershipApp.Controllers
             model.UserID = (int)TempData["UserID"];
 
             DocumentViewModel.InsertDocument(model);
-
-
             return RedirectToAction("Index", "Clients");
-
-
         }
 
     }

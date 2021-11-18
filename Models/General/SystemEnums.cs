@@ -7,6 +7,7 @@ namespace MassiveDynamicSimpleMembershipApp.Models.General
 {
     public class SystemEnums
     {
+        //this enum is used to define the roles to the view and identify curren user role
         public enum role
         {
             NoRole = 0,

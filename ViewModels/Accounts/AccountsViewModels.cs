@@ -13,7 +13,7 @@ namespace MassiveDynamicSimpleMembershipApp.ViewModels.Accounts
     {
       //  this is comment
 
-        //This is User Bind the Roles with dropDownlist
+        //This is Used to Bind the Roles with dropDownlist
         public static List<SelectListItem> GetAllRoles(int RoleId)
         {
             List<SelectListItem> roles = new List<SelectListItem>();
@@ -41,6 +41,7 @@ namespace MassiveDynamicSimpleMembershipApp.ViewModels.Accounts
         }
 
 
+        //this Function is used to Get all Users Information for Admin
         public static List<UserModel> GetAllUser()
         {
             List<UserModel> users = new List<UserModel>();
@@ -62,16 +63,14 @@ namespace MassiveDynamicSimpleMembershipApp.ViewModels.Accounts
                         item.UserName = reader["UserName"].ToString();
                         item.Email = reader["Email"].ToString();
                         item.Role = reader["RoleName"].ToString();
-
-
                         users.Add(item);
                     }
-
                 }
             }
             return users;
         }
 
+        //this allow admin to delete all users releated data through store procdure
         internal static void DeleteUsers(int userid)
         {
             using (SqlConnection conn = new SqlConnection(Appsetting.ConnectionString()))

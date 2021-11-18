@@ -10,6 +10,7 @@ using WebMatrix.WebData;
 using static MassiveDynamicSimpleMembershipApp.Models.General.SystemEnums;
 using MassiveDynamicSimpleMembershipApp.ViewModels.Accounts;
 using MassiveDynamicSimpleMembershipApp.Models.Clients;
+using MassiveDynamicSimpleMembershipApp.ViewModels.Document;
 
 namespace MassiveDynamicSimpleMembershipApp.Controllers
 {
@@ -93,7 +94,7 @@ namespace MassiveDynamicSimpleMembershipApp.Controllers
             else ViewBag.RoleId = (int)role.NoRole;
         }
 
-
+        // only Administrator can do everything , Scretary here can only register the client
         [HttpPost, ValidateAntiForgeryToken]
         [Authorize(Roles = "Administrator , Secretary")]
         public ActionResult Register(RegisterModel registrationModel, HttpPostedFileBase postedFile)
@@ -113,7 +114,7 @@ namespace MassiveDynamicSimpleMembershipApp.Controllers
                     if (registrationModel.Role == "Client")
                     {
                         string FronUniqueID = registrationModel.ClientUniqueID;
-                        string DBClientID = FilesViewModel.CheckUniqueID(FronUniqueID);
+                        string DBClientID = DocumentViewModel.CheckUniqueID(FronUniqueID);
 
                         // here We are Checking where the Unique Client ID is Exist or not
                         if (DBClientID == FronUniqueID)
@@ -137,7 +138,8 @@ namespace MassiveDynamicSimpleMembershipApp.Controllers
                                 new { Name = registrationModel.Name, Email = registrationModel.Email });
                             //Used to add roles to user
                             Roles.AddUserToRole(registrationModel.UserName, registrationModel.Role);
-                            FilesViewModel.InsertFile(registrationModel);
+                            //insert path and file name to Db
+                            DocumentViewModel.InsertFile(registrationModel);
                             ViewBag.Message = "User Registered Successfully";
                             #endregion
                         }

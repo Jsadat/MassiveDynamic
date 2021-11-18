@@ -11,21 +11,21 @@ namespace MassiveDynamicSimpleMembershipApp.Controllers
 {
     public class ClientsController : Controller
     {
-        // GET: Clients
+        // GET: Clients is used to show the client list
+        [Authorize(Roles = "Administrator , Secretary")]
         public ActionResult Index()
         {
             List<ClientsModel> Cleintlist = ClientsViewModel.GetAllClient();
             return View(Cleintlist);
-
-            
         }
 
+        // This fucntion Search the Client with Unique Id and return it's data
         [HttpPost, ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator , Secretary")]
         public ActionResult Index(string SearchTerm)
         {
             if (SearchTerm != "")
             {
-               // ClientsViewModel CVM = new ClientsViewModel();
                 List<ClientsModel> Cleintlist = ClientsViewModel.FindClient(SearchTerm);
                 return View(Cleintlist);
             }
@@ -37,18 +37,16 @@ namespace MassiveDynamicSimpleMembershipApp.Controllers
         }
 
         // is used to View the Documents of the client
+        [Authorize(Roles = "Administrator , Secretary")]
         public ActionResult ViewDocument(int id)
         {
             List<ClientsModel> Documents = ClientsViewModel.GetDocumentsOfClient(id);
-            TempData["UserID"]  = id;
+            TempData["UserID"] = id;
             return View(Documents);
         }
 
 
-
-
-        //This Delete is Used To Delete Document of the Client
-
+        //This Delete is Used To Delete Document of the Client and only can by administrator
         [Authorize(Roles = "Administrator")]
         [HttpGet]
         public ActionResult Delete(int Clientid = 0)
@@ -61,29 +59,27 @@ namespace MassiveDynamicSimpleMembershipApp.Controllers
 
         }
 
+        //following function is used to view data of Specific client for editing
         [HttpGet]
         [Authorize(Roles = "Administrator , Secretary")]
         public ActionResult EditClient(int UserId)
         {
             ClientsModel Cleintlist = ClientsViewModel.GetClientByUserID(UserId);
             return View(Cleintlist);
-            //return View();
         }
 
+        //this is used to Edit the info of Client
         [HttpPost]
         [Authorize(Roles = "Administrator , Secretary")]
         public ActionResult EditClient(ClientsModel clientmodel)
         {
-            if(clientmodel.UserId!=0)
-            {ClientsViewModel.EditClientInfo(clientmodel); }
-
+            if (clientmodel.UserId != 0)
+            { ClientsViewModel.EditClientInfo(clientmodel); }
             return RedirectToAction("Index", "Clients");
-
         }
 
 
         //follwoing funtion is to delete client only adminstrator can
-
         [Authorize(Roles = "Administrator")]
         public ActionResult DeleteClient(int userid = 0)
         {
@@ -92,9 +88,9 @@ namespace MassiveDynamicSimpleMembershipApp.Controllers
                 ClientsViewModel.DeleteClientInfo(userid);
             }
             return RedirectToAction("Index", "Clients");
-
         }
 
+        //This Function is showing current loged in client information
         [Authorize]
         [HttpGet]
         public ActionResult ClientProfile()

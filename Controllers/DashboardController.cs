@@ -8,7 +8,8 @@ namespace MassiveDynamicSimpleMembershipApp.Controllers
 {
     public class DashboardController : Controller
     {
-        // GET: Dashboard
+        // GET: Dashboard is only for design purpose
+        [Authorize]
         public ActionResult Index()
         {
             return View();

@@ -43,6 +43,7 @@ namespace MassiveDynamicSimpleMembershipApp.ViewModels.Clients
             return client;
         }
 
+        //this is used to find specific client as per Client Unique ID
         public static List<ClientsModel> FindClient(string SearchTerm)
         {
             List<ClientsModel> info = new List<ClientsModel>();
@@ -65,15 +66,13 @@ namespace MassiveDynamicSimpleMembershipApp.ViewModels.Clients
                     item.Email = reader["Email"].ToString();
                     item.UniqueID = reader["ClientUniqueID"].ToString();
 
-
                     info.Add(item);
-
-
                 }
             }
             return info;
         }
 
+        //this function is used to Get current loged in Client information
         internal static ClientProfileModel GetClientProfile(int currentUserId)
         {
             ClientProfileModel ClientProfile = new ClientProfileModel();
@@ -128,7 +127,7 @@ namespace MassiveDynamicSimpleMembershipApp.ViewModels.Clients
             return Doc;
         }
 
-        //Is Used to Delete only the documnet of client by Admin
+        //Is Used to Delete only the select documnet of client by Admin
         internal static void DeleteDocument(int id)
         {
             using (SqlConnection conn = new SqlConnection(Appsetting.ConnectionString()))
@@ -173,6 +172,8 @@ namespace MassiveDynamicSimpleMembershipApp.ViewModels.Clients
             }
             return item;
         }
+
+        //this is for Editing Client Information in our DB
         internal static void EditClientInfo(ClientsModel model)
         {
             using (SqlConnection conn = new SqlConnection(Appsetting.ConnectionString()))
@@ -194,6 +195,7 @@ namespace MassiveDynamicSimpleMembershipApp.ViewModels.Clients
             }
         }
 
+        //this is for Deleting Client Information permanint in our DB
         internal static void DeleteClientInfo(int UserId)
         {
             using (SqlConnection conn = new SqlConnection(Appsetting.ConnectionString()))

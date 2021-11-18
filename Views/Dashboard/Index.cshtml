@@ -2,15 +2,16 @@
 @{
     ViewBag.Title = "Index";
 }
-<br />
+
 <h2>Dashboard</h2>
+<br />
 <div class="row">
     <div class="col-md-12">
         <div class="alert alert-info">
             <p>Wellcome to Massive Dynamic Managment System</p>
         </div>
     </div>
-    <br />
+    
 
     @if (User.IsInRole("Administrator"))
     {
@@ -34,20 +35,6 @@
                         </a>
                     </div>
 
-                    @*<div class="col-md-3">
-                            <a href='@Url.Action("UserList", "Accounts")'>
-                                <i class="far fa-file-alt fa-3x"></i>
-                                <h4>Client Document</h4>
-                            </a>
-                        </div>
-
-                        <div class="col-md-3">
-                            <a href='@Url.Action("Register", "Accounts")'>
-                                <i class="fas fa-user fa-3x"></i>
-                                <h4>Register User</h4>
-                            </a>
-                        </div>*@
-
                 </div>
             </div>
         </div>
@@ -56,7 +43,6 @@
 
     @if (User.IsInRole("Administrator") || User.IsInRole("Secretary"))
     {
-
         <div class="col-md-6">
             <div class="panel panel-success">
                 <div class="panel-heading">
@@ -107,10 +93,12 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>      
     }
-
+   
 </div>
-
-
+<br /><br /><br />
+<center>
+    <img src="~/Models/Files/certigon-logo-1.png" />
+</center>
 

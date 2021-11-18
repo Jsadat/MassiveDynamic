@@ -48,5 +48,6 @@ namespace MassiveDynamicSimpleMembershipApp.Models.Accounts
         [RegularExpression("^[a-zA-Z0-9]*$", ErrorMessage = "Only Alphabets and Numbers allowed.")]
         public string ClientUniqueID { get; set; }
         public object FileName { get; internal set; }
+        public int UserID { get; internal set; }
     }
 }

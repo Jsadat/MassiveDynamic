@@ -3,13 +3,19 @@
 @{
     ViewBag.Title = "Login";
 }
-
+<style>
+    img {
+        margin-left: 650px;
+        margin-top:-240px;
+        width:400px;
+    }
+</style>
 <h2>Login Page</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         @*<h4>Login Page</h4>*@
         <hr />
@@ -34,8 +40,8 @@
             @Html.LabelFor(model => model.RememberMe, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @*<div class="checkbox">*@
-                    @Html.EditorFor(model => model.RememberMe)
-                    @Html.ValidationMessageFor(model => model.RememberMe, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.RememberMe)
+                @Html.ValidationMessageFor(model => model.RememberMe, "", new { @class = "text-danger" })
                 @*</div>*@
             </div>
         </div>
@@ -48,6 +54,5 @@
     </div>
 }
 
-@*<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>*@
+<img src="~/Models/Files/certigon-logo-1.png"  />
+   
