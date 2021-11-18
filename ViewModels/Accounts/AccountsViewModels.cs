@@ -11,6 +11,7 @@ namespace MassiveDynamicSimpleMembershipApp.ViewModels.Accounts
 {
     public class AccountsViewModels
     {
+      //  this is comment
 
         //This is User Bind the Roles with dropDownlist
         public static List<SelectListItem> GetAllRoles(int RoleId)
