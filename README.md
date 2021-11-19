@@ -1,2 +1,1 @@
-# MassiveDynamic
-this is project
+# Massive Dynamic Protal-Based management System
