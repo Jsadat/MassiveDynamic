@@ -91,8 +91,6 @@ namespace MassiveDynamicSimpleMembershipApp.ViewModels.Clients
                     ClientProfile.UserName = reader["UserName"].ToString();
                     ClientProfile.Email = reader["Email"].ToString();
                     ClientProfile.UniqueId = reader["ClientUniqueID"].ToString();
-
-
                 }
             }
             return ClientProfile;
